@@ -1,3 +1,5 @@
+import 'package:applicatin/component/custom_button.dart';
+import 'package:applicatin/component/custom_textfield.dart';
 import 'package:applicatin/profile_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,8 +13,7 @@ class Login2Screen extends StatefulWidget {
 class _Login2ScreenState extends State<Login2Screen> {
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroler = TextEditingController();
-  bool tampilPassword =
-      true; 
+  bool tampilPassword = true;
 
   showPassword() {
     setState(() {
@@ -23,6 +24,7 @@ class _Login2ScreenState extends State<Login2Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Login')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
@@ -42,51 +44,53 @@ class _Login2ScreenState extends State<Login2Screen> {
                 ),
               ),
               SizedBox(height: 25.0),
-              TextField(
+              CustomTextfield(
                 controller: emailcontroller,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  hintText: 'Enter your email',
-                  prefixIcon: Icon(Icons.email),
-                ),
+                labelText: 'Email',
+                hintText: 'Enter your email',
+                prefixIcon: Icon(Icons.email),
               ),
-              TextField(
-                obscureText:
-                    tampilPassword, 
+              CustomTextfield(
+                obscureText: tampilPassword,
                 controller: passwordcontroler,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  hintText: 'Enter Password',
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      showPassword();
-                    },
-                    icon: Icon(
-                      tampilPassword ? Icons.visibility_off : Icons.visibility,
-                    ),
+                labelText: 'Password',
+                hintText: 'Enter Password',
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    showPassword();
+                  },
+                  icon: Icon(
+                    tampilPassword ? Icons.visibility_off : Icons.visibility,
                   ),
-                  prefixIcon: Icon(Icons.lock),
                 ),
+                prefixIcon: Icon(Icons.lock),
               ),
               SizedBox(height: 10.0),
-              ElevatedButton(
+              CustomButton(
+                text: 'Show Password',
                 onPressed: () {
-                  showPassword(); 
+                  showPassword();
                 },
-                child: Text('Show Password'),
               ),
               SizedBox(height: 50.0),
-              ElevatedButton(
+              CustomButton(
+                text: 'Log In',
+                backgroundColor: const Color.fromARGB(255, 125, 104, 160),
+                textColor: Colors.white,
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ProfileScreen()),
                   );
                 },
-                child: Text('Log In', style: TextStyle(color: Colors.white)),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 125, 104, 160),
-                ),
+              ),
+              SizedBox(height: 5.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Don't have an account?"),
+                  TextButton(onPressed: () {}, child: const Text('Sign Up')),
+                ],
               ),
             ],
           ),
